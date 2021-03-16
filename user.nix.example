@@ -3,4 +3,6 @@
 {
   username = "awesomeme";
   homeDirectory = "myhomedir";
+  gitUsername = "gitawesomeme";
+  gitEmail = "email@git.me";
 }

@@ -137,6 +137,20 @@ in
     };
   };
 
+  programs.git = {
+    enable = true;
+    userName = userInfo.gitUsername;
+    userEmail = userInfo.gitEmail;
+    extraConfig = {
+      alias = {
+        co = "checkout";
+        br = "branch";
+        ci = "commit";
+        st = "status";
+      };
+    };
+  };
+
   home.file."secrets".text = builtins.readFile ./secrets;
 
   systemd.user.services.neuron = let
