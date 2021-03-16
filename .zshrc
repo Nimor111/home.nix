@@ -18,7 +18,7 @@ eval "$(direnv hook zsh)"
 . $HOME/.nix-profile/etc/profile.d/nix.sh
 
 # Secrets
-source ./secrets
+source secrets
 
 eval "$(jump shell)"
 

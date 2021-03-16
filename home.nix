@@ -37,6 +37,10 @@ in
     pkgs.bat
     pkgs.direnv
     pkgs.pfetch
+
+    (let neuronRev = "44855fb8674e74a6b9a6688a8dff0298e9c78124";
+        neuronSrc = builtins.fetchTarball "https://github.com/srid/neuron/archive/${neuronRev}.tar.gz";
+     in import neuronSrc {})
   ];
 
   programs.htop = {
@@ -136,17 +140,17 @@ in
   home.file."secrets".text = builtins.readFile ./secrets;
 
   systemd.user.services.neuron = let
-    notesDir = "~/zettelkasten";
+    notesDir = "/home/lt-34502/zettelkasten";
     # See "Declarative Install"
     neuron = (
       let neuronRev = "44855fb8674e74a6b9a6688a8dff0298e9c78124";
-          neuronSrc = builtins.fetchTarball https://github.com/srid/neuron/archive/${neuronRev}.tar.gz;
+          neuronSrc = builtins.fetchTarball "https://github.com/srid/neuron/archive/${neuronRev}.tar.gz";
        in import neuronSrc {});
   in {
     Unit.Description = "Neuron zettelkasten service";
     Install.WantedBy = [ "graphical-session.target" ];
     Service = {
-      ExecStart = "${neuron}/bin/neuron -d ${notesDir} rib -wS";
+      ExecStart = "${neuron}/bin/neuron -d ${notesDir} rib -ws 127.0.0.1:8081";
     };
   };
 }
