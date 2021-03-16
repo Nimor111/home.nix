@@ -1,0 +1,14 @@
+* Home.nix
+Personal home manager configuration for non-nixos systems
+
+** How to install
+Clone this repo into =~/.config/nixpkgs=
+
+Rename the =user.nix.example= to =user.nix= and enter your data.
+Same goes for =secret.example= to =secrets=.
+
+Then install [[https://github.com/nix-community/home-manager][home-manager]] and run
+
+#+begin_src sh
+home-manager switch
+#+end_src
