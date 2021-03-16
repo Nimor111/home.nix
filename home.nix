@@ -154,7 +154,7 @@ in
   home.file."secrets".text = builtins.readFile ./secrets;
 
   systemd.user.services.neuron = let
-    notesDir = "/home/lt-34502/zettelkasten";
+    notesDir = "${userInfo.homeDirectory}/zettelkasten";
     # See "Declarative Install"
     neuron = (
       let neuronRev = "44855fb8674e74a6b9a6688a8dff0298e9c78124";
