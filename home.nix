@@ -37,6 +37,7 @@ in
     pkgs.bat
     pkgs.direnv
     pkgs.pfetch
+    pkgs.ripgrep
 
     (let neuronRev = "44855fb8674e74a6b9a6688a8dff0298e9c78124";
         neuronSrc = builtins.fetchTarball "https://github.com/srid/neuron/archive/${neuronRev}.tar.gz";
@@ -162,7 +163,7 @@ in
        in import neuronSrc {});
   in {
     Unit.Description = "Neuron zettelkasten service";
-    Install.WantedBy = [ "graphical-session.target" ];
+    Install.WantedBy = [ "default.target" ];
     Service = {
       ExecStart = "${neuron}/bin/neuron -d ${notesDir} rib -ws 127.0.0.1:8081";
     };
