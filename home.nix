@@ -38,6 +38,8 @@ in
     pkgs.direnv
     pkgs.pfetch
     pkgs.ripgrep
+    pkgs.termonad-with-packages
+    pkgs.xmobar
 
     (let neuronRev = "44855fb8674e74a6b9a6688a8dff0298e9c78124";
         neuronSrc = builtins.fetchTarball "https://github.com/srid/neuron/archive/${neuronRev}.tar.gz";
@@ -154,6 +156,8 @@ in
 
   home.file."secrets".text = builtins.readFile ./secrets;
 
+  xdg.configFile."termonad/termonad.hs".text = builtins.readFile ./termonad.hs;
+
   systemd.user.services.neuron = let
     notesDir = "${userInfo.homeDirectory}/zettelkasten";
     # See "Declarative Install"
@@ -166,6 +170,88 @@ in
     Install.WantedBy = [ "default.target" ];
     Service = {
       ExecStart = "${neuron}/bin/neuron -d ${notesDir} rib -ws 127.0.0.1:8081";
+    };
+  };
+
+  xsession = {
+    enable = true;
+
+    windowManager.xmonad = {
+      enable = true;
+      enableContribAndExtras = true;
+
+      config = pkgs.writeText "xmonad.hs" (builtins.readFile ./xmonad.hs);
+    };
+  };
+
+  xdg.configFile."xmobar/.xmobarrc".text = builtins.readFile ./.xmobarrc;
+
+  home.file = {
+    ".config/xmobar" = {
+      source = ./xpm;
+      recursive = true;
+    };
+  };
+
+  services.dunst = {
+    enable = true;
+
+    iconTheme = {
+      package = pkgs.papirus-icon-theme;
+      name = "Papirus";
+      size = "48x48";
+    };
+
+    settings = {
+      global = {
+        font = "mononoki Nerd Font Mono 14";
+        allow_markup = "yes";
+        icon_position = "left";
+        max_icon_size = 32;
+        sort = "yes";
+        indicate_hidden = "yes";
+        alignment = "left";
+        show_age_threshold = 30;
+        word_wrap = "yes";
+        ignore_newline = "no";
+        geometry = "300x5+30-50";
+        transparency = 20;
+        idle_threshold = 120;
+        monitor = 0;
+        follow = "mouse";
+        sticky_history = "yes";
+        line_height = 0;
+        separator_height = 2;
+        padding = 8;
+        horizontal_padding = 8;
+        separator_color = "frame";
+        startup_notification = "false";
+        frame_width = 3;
+      };
+      shortcuts = {
+        close = "ctrl+space";
+        close_all = "ctrl+shift+space";
+        history = "ctrl+dollar";
+        context = "ctrl+shift+period";
+      };
+      urgency_low = {
+        background = "#282828";
+        foreground = "#ebdbb2";
+        frame_color = "#83a598";
+        timeout = 10;
+      };
+      urgency_normal = {
+        background = "#282828";
+        foreground = "#ebdbb2";
+        frame_color = "#83a598";
+        timeout = 10;
+      };
+      urgency_critical = {
+        background = "#282828";
+        foreground = "#ebdbb2";
+        frame_color = "#83a598";
+        timeout = 0;
+      };
     };
   };
 }

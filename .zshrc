@@ -25,3 +25,10 @@ eval "$(jump shell)"
 export NODE_OPTIONS=--max-old-space-size=2048
 
 export EDITOR=nvim
+
+export GUIX_LOCPATH=$HOME/.guix-profile/lib/locale
+
+export GUIX_PROFILE=$HOME/.config/guix/current
+. $GUIX_PROFILE/etc/profile
+
+export PATH=$PATH:$HOME/.local/bin
