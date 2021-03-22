@@ -47,6 +47,8 @@ myStartupHook = do
     setWMName "LG3D"
     setDefaultCursor xC_left_ptr
     spawnOnce "setxkbmap -option grp:switch,grp:alt_shift_toggle,grp_led:scroll us,bg -variant ,phonetic &"
+    spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 0 --tint 0x292d3e --height 18 &"
+    spawnOnce "nextcloud-client &"
     spawnOnce "feh --bg-scale $HOME/wallpaper.png &"
 
 -- this is to make enough room for xmobar on the screen
