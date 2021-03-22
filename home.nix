@@ -2,6 +2,7 @@
 
 let
   userInfo = import ./user.nix { };
+  myPackages = (import ./packages.nix { inherit pkgs; }).packages;
 in
 {
   # Let Home Manager install and manage itself.
@@ -22,32 +23,7 @@ in
   # changes in each release.
   home.stateVersion = "21.05";
 
-  home.packages = [
-    #pkgs.sbt
-    #pkgs.scala
-    pkgs.jump
-    pkgs.slack
-    pkgs.nodejs-10_x
-    pkgs.xclip
-    pkgs.xdotool
-    pkgs.gopass
-    pkgs.feh
-    pkgs.zathura
-    pkgs.exa
-    pkgs.bat
-    pkgs.direnv
-    pkgs.pfetch
-    pkgs.ripgrep
-    pkgs.termonad-with-packages
-    pkgs.xmobar
-    pkgs.dmenu
-    pkgs.trayer
-    pkgs.nextcloud-client
-
-    (let neuronRev = "44855fb8674e74a6b9a6688a8dff0298e9c78124";
-        neuronSrc = builtins.fetchTarball "https://github.com/srid/neuron/archive/${neuronRev}.tar.gz";
-     in import neuronSrc {})
-  ];
+  home.packages = myPackages;
 
   programs.htop = {
     enable = true;
