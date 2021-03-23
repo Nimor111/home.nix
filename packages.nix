@@ -22,6 +22,7 @@
     pkgs.dmenu
     pkgs.trayer
     pkgs.nextcloud-client
+    pkgs.cmake
 
     (let neuronRev = "44855fb8674e74a6b9a6688a8dff0298e9c78124";
         neuronSrc = builtins.fetchTarball "https://github.com/srid/neuron/archive/${neuronRev}.tar.gz";
