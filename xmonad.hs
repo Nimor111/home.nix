@@ -54,9 +54,10 @@ myStartupHook = do
 -- this is to make enough room for xmobar on the screen
 myLayout = avoidStruts $ layoutHook desktopConfig
 myManageHook = composeAll
-    [ className =? "Brave-browser" --> doShift ( myWorkspaces !! 1 )
-    , className =? "Firefox"       --> doShift ( myWorkspaces !! 1 )
-    , className =? "vlc"           --> doShift ( myWorkspaces !! 4 )
+    [ className =? "Brave-browser"          --> doShift ( myWorkspaces !! 1 )
+    , className =? "Firefox"                --> doShift ( myWorkspaces !! 1 )
+    , className =? "vlc"                    --> doShift ( myWorkspaces !! 4 )
+    , className =? "jetbrains-idea"         --> doShift ( myWorkspaces !! 2 )
     ] <+> manageHook desktopConfig <+> manageDocks
 
 myKeys =
