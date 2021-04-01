@@ -66,6 +66,9 @@ myKeys =
     , ("M-l", spawn myLockScreenCommand)
     , ("M-r", spawn "rofi -show run")
     , ("M-w", spawn "rofi -show window")
+    -- you have to install the light package for this to work, if on non-nixos system it doesn't work when installed with nix
+    , ("<XF86MonBrightnessUp>",   spawn "light -A 10")
+    , ("<XF86MonBrightnessDown>", spawn "light -U 10")
     ]
 
 myWorkspaces = [ "dev", "www", "code", "emacs", "vpn", "slack", "chat", "book", "game" ]
