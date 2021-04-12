@@ -25,6 +25,14 @@ in
 
   home.packages = myPackages;
 
+  #services.emacs.package = pkgs.emacsUnstable;
+
+  nixpkgs.overlays = [
+    (import (builtins.fetchTarball {
+      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
+    }))
+  ];
+
   programs.htop = {
     enable = true;
   };
@@ -36,6 +44,8 @@ in
 
   programs.emacs = {
     enable = true;
+    #package = pkgs.emacsGcc;
+    package = pkgs.emacsUnstable;
   };
 
   programs.tmux = {
