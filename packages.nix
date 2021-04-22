@@ -8,7 +8,7 @@
     pkgs.ammonite
     pkgs.jump
     pkgs.slack
-    pkgs.nodejs-10_x
+    pkgs.nodejs-12_x
     pkgs.xclip
     pkgs.xdotool
     pkgs.gopass
