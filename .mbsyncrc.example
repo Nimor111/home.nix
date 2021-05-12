@@ -1,0 +1,50 @@
+# Gmail
+IMAPAccount gmail
+Host imap.gmail.com
+User <your-user>@gmail.com
+PassCmd "command to fetch password"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore gmail-remote
+Account gmail
+
+MaildirStore gmail-local
+Subfolders Verbatim
+Path ~/.mail/gmail/
+Inbox ~/.mail/gmail/INBOX
+
+Channel gmail
+Master :gmail-remote:
+Slave :gmail-local:
+Patterns *
+Create Both
+SyncState *
+
+# Outlook
+IMAPAccount outlook
+Host outlook.office365.com
+Port 993
+User <your-user>@outlook.com
+PassCmd "command to fetch password"
+AuthMechs PLAIN
+SSLType IMAPS
+SSLVersions TLSv1.2
+Timeout 600
+PipelineDepth 1
+
+IMAPStore outlook-remote
+Account outlook
+
+MaildirStore outlook-local
+SubFolders Legacy 
+Path ~/.mail/outlook/
+Inbox ~/.mail/outlook/INBOX/
+
+Channel outlook
+Master :outlook-remote:
+Slave :outlook-local:
+Patterns *
+Create Both
+Sync All
+Expunge Both

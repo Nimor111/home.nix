@@ -42,6 +42,11 @@ in
     theme = "gruvbox-dark-hard";
   };
 
+  programs.mbsync = {
+    enable = true;
+    extraConfig = builtins.readFile ./.mbsyncrc;
+  };
+
   programs.emacs = {
     enable = true;
     #package = pkgs.emacsGcc;
