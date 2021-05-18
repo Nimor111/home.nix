@@ -2,9 +2,12 @@
 
 {
   packages = [
-    #pkgs.sbt
     #pkgs.scala
 
+    pkgs.imagemagick
+    pkgs.fd
+    pkgs.sbt
+    pkgs.jdk11
     pkgs.gcc
     pkgs.ammonite
     pkgs.jump
