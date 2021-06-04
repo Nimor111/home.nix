@@ -3,6 +3,8 @@ import System.IO (hPutStrLn)
 import XMonad
 
 import XMonad.Config.Desktop (desktopConfig)
+import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.ManageHelpers
 
 import XMonad.Util.SpawnOnce (spawnOnce)
 import XMonad.Util.Run (spawnPipe)
@@ -56,8 +58,10 @@ myLayout = avoidStruts $ layoutHook desktopConfig
 myManageHook = composeAll
     [ className =? "Brave-browser"          --> doShift ( myWorkspaces !! 1 )
     , className =? "Firefox"                --> doShift ( myWorkspaces !! 1 )
+    , className =? "Google-chrome"          --> doShift ( myWorkspaces !! 1 )
     , className =? "vlc"                    --> doShift ( myWorkspaces !! 4 )
     , className =? "jetbrains-idea"         --> doShift ( myWorkspaces !! 2 )
+    , isFullscreen                          --> doFullFloat
     ] <+> manageHook desktopConfig <+> manageDocks
 
 myKeys =
@@ -66,6 +70,7 @@ myKeys =
     , ("M-l", spawn myLockScreenCommand)
     , ("M-r", spawn "rofi -show run")
     , ("M-w", spawn "rofi -show window")
+    , ("M-p", spawn "gopass ls --flat | rofi -dmenu | xargs --no-run-if-empty gopass show -c")
     -- you have to install the light package for this to work, if on non-nixos system it doesn't work when installed with nix
     , ("<XF86MonBrightnessUp>",   spawn "light -A 10")
     , ("<XF86MonBrightnessDown>", spawn "light -U 10")
