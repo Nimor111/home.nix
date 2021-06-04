@@ -33,6 +33,16 @@ in
     }))
   ];
 
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
+  programs.autojump = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
   programs.htop = {
     enable = true;
   };
@@ -42,10 +52,10 @@ in
     theme = "gruvbox-dark-hard";
   };
 
-  programs.mbsync = {
-    enable = true;
-    extraConfig = builtins.readFile ./.mbsyncrc;
-  };
+  #programs.mbsync = {
+  #  enable = true;
+  #  extraConfig = builtins.readFile ./.mbsyncrc;
+  #};
 
   programs.emacs = {
     enable = true;

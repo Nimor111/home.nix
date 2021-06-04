@@ -10,11 +10,11 @@
     pkgs.jdk11
     pkgs.gcc
     pkgs.ammonite
-    pkgs.jump
     pkgs.slack
     pkgs.nodejs-12_x
     pkgs.xclip
     pkgs.xdotool
+    pkgs.xautolock
     pkgs.gopass
     pkgs.feh
     pkgs.zathura
@@ -37,6 +37,10 @@
     pkgs.brave
     pkgs.mu
     pkgs.ledger
+    pkgs.python3
+    pkgs.scrot
+    pkgs.tree
+    pkgs.jq
 
     (let neuronRev = "44855fb8674e74a6b9a6688a8dff0298e9c78124";
         neuronSrc = builtins.fetchTarball "https://github.com/srid/neuron/archive/${neuronRev}.tar.gz";

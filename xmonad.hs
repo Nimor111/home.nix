@@ -51,7 +51,8 @@ myStartupHook = do
     spawnOnce "setxkbmap -option grp:switch,grp:alt_shift_toggle,grp_led:scroll us,bg -variant ,phonetic &"
     spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 0 --tint 0x292d3e --height 18 &"
     spawnOnce "nextcloud-client &"
-    spawnOnce "feh --bg-scale $HOME/wallpaper.png &"
+    spawnOnce "feh --bg-scale $HOME/wallpaper.jpg &"
+    spawnOnce "xautolock -time 5 -locker \"betterlockscreen -l\" &"
 
 -- this is to make enough room for xmobar on the screen
 myLayout = avoidStruts $ layoutHook desktopConfig
@@ -71,9 +72,13 @@ myKeys =
     , ("M-r", spawn "rofi -show run")
     , ("M-w", spawn "rofi -show window")
     , ("M-p", spawn "gopass ls --flat | rofi -dmenu | xargs --no-run-if-empty gopass show -c")
-    -- you have to install the light package for this to work, if on non-nixos system it doesn't work when installed with nix
-    , ("<XF86MonBrightnessUp>",   spawn "light -A 10")
-    , ("<XF86MonBrightnessDown>", spawn "light -U 10")
+    -- you have to install the light ( or lux ) package for this to work, if on non-nixos system it doesn't work when installed with nix
+    , ("<XF86MonBrightnessUp>",   spawn "lux -a 10%")
+    , ("<XF86MonBrightnessDown>", spawn "lux -s 10%")
+    , ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
+    , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ -10%")
+    , ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +10%")
+    , ("<Print>", spawn "scrot -s")
     ]
 
 myWorkspaces = [ "dev", "www", "code", "emacs", "vpn", "slack", "chat", "book", "game" ]

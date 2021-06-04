@@ -20,8 +20,6 @@ eval "$(direnv hook zsh)"
 # Secrets
 source secrets
 
-eval "$(jump shell)"
-
 export NODE_OPTIONS=--max-old-space-size=2048
 
 export EDITOR=nvim
@@ -47,3 +45,5 @@ vterm_printf(){
 }
 
 eval $(thefuck --alias)
+
+export BROWSER=$(which brave)
