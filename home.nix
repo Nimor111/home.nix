@@ -3,6 +3,17 @@
 let
   userInfo = import ./user.nix { };
   myPackages = (import ./packages.nix { inherit pkgs; }).packages;
+
+  vim-zettel = pkgs.vimUtils.buildVimPlugin {
+    name = "vim-zettel";
+    src = pkgs.fetchFromGitHub {
+      owner = "michal-h21";
+      repo = "vim-zettel";
+      rev = "929d90eec62e6f693c2702d2b6f76a93f2f1689d";
+      sha256 = "07ma6ylvvyncr24pinvlybygddjdi2r835x7q8c52mnz96dcmz6m";
+    };
+  };
+
 in
 {
   # Let Home Manager install and manage itself.
@@ -60,7 +71,7 @@ in
   programs.emacs = {
     enable = true;
     #package = pkgs.emacsGcc;
-    package = pkgs.emacsUnstable;
+    package = pkgs.emacs;
   };
 
   programs.tmux = {
@@ -123,6 +134,13 @@ in
       }
       vim-snippets
       vim-nix
+      { plugin = vimwiki;
+        config = ''
+          let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+        '';
+      }
+      vim-zettel
+      fzf-vim
     ];
   };
 
