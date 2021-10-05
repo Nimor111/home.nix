@@ -14,6 +14,15 @@ let
     };
   };
 
+  vim-which-key = pkgs.vimUtils.buildVimPlugin {
+    name = "vim-which-key";
+    src = pkgs.fetchFromGitHub {
+      owner = "liuchengxu";
+      repo = "vim-which-key";
+      rev = "2c915b6de918c073fbd83809e51343651f00f9a8";
+      sha256 = "05jdjmpyczcgqsm5mznyb79bq10ianv7v3rhxy9wrklkama3jrgs";
+    };
+  };
 in
 {
   # Let Home Manager install and manage itself.
@@ -141,6 +150,14 @@ in
       }
       vim-zettel
       fzf-vim
+      { plugin = vim-which-key;
+        config = ''
+          let g:mapleader = "\<Space>"
+          nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
+        '';
+      }
+      vim-startify
+      # vim-gtd
     ];
   };
 
