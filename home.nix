@@ -4,6 +4,18 @@ let
   userInfo = import ./user.nix { };
   myPackages = (import ./packages.nix { inherit pkgs; }).packages;
 
+  # TODO put custom vim plugins in another file
+  # nix-prefetch-git <git-url>
+  # plugin-name = pkgs.vimUtils.buildVimPlugin {
+  # name = "plugin-name";
+  # src = pkgs.fetchFromGitHub {
+  # owner = "plugin-org";
+  # repo = "plugin-repo";
+  # rev = "<ref>";
+  # sha256 = "<sha256>";
+  # };
+  # };
+
   vim-zettel = pkgs.vimUtils.buildVimPlugin {
     name = "vim-zettel";
     src = pkgs.fetchFromGitHub {
