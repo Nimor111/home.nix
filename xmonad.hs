@@ -68,7 +68,7 @@ myManageHook = composeAll
 myKeys =
     [ ("M-<Return>", spawn myTerminal)
     , ("M-d", spawn "dmenu_run -p 'dmenu:'")
-    , ("M-l", spawn myLockScreenCommand)
+    , ("M-S-l", spawn myLockScreenCommand)
     , ("M-r", spawn "rofi -show run")
     , ("M-w", spawn "rofi -show window")
     , ("M-p", spawn "gopass ls --flat | rofi -dmenu | xargs --no-run-if-empty gopass show -c")
