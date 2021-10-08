@@ -35,6 +35,36 @@ let
       sha256 = "05jdjmpyczcgqsm5mznyb79bq10ianv7v3rhxy9wrklkama3jrgs";
     };
   };
+
+  vim-gtd = pkgs.vimUtils.buildVimPlugin {
+    name = "gtd.vim";
+    src = pkgs.fetchFromGitHub {
+      owner = "fifi2";
+      repo = "gtd.vim";
+      rev = "e0201b7696087e5a534560a539d95c9f618fa491";
+      sha256 = "1y03fdirg5xgz16lic686zjf6xap0phy53qfn4hp0xmlgd00di5a";
+    };
+  };
+
+  browser = [
+    "brave-browser.desktop"
+  ];
+  associations = {
+    "application/pdf" = [ "zathura" ];
+    "text/html" = browser;
+    "x-scheme-handler/http" = browser;
+    "x-scheme-handler/https" = browser;
+    "x-scheme-handler/ftp" = browser;
+    "x-scheme-handler/chrome" = browser;
+    "x-scheme-handler/about" = browser;
+    "x-scheme-handler/unknown" = browser;
+    "application/x-extension-htm" = browser;
+    "application/x-extension-html" = browser;
+    "application/x-extension-shtml" = browser;
+    "application/xhtml+xml" = browser;
+    "application/x-extension-xhtml" = browser;
+    "application/x-extension-xht" = browser;
+  };
 in
 {
   # Let Home Manager install and manage itself.
@@ -169,7 +199,11 @@ in
         '';
       }
       vim-startify
-      # vim-gtd
+      { plugin = vim-gtd;
+        config = ''
+          let g:gtd#dir = "~/gtd"
+        '';
+      }
     ];
   };
 
@@ -305,4 +339,14 @@ in
       };
     };
   };
+
+  xdg.mime.enable = true;
+
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = associations;
+    associations.added = associations;
+  };
+
+  targets.genericLinux.enable = true;
 }
