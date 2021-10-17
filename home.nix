@@ -64,6 +64,8 @@ let
     "application/xhtml+xml" = browser;
     "application/x-extension-xhtml" = browser;
     "application/x-extension-xht" = browser;
+    "application/x-ms-dos-executable" = [ "wine.desktop" ];
+    "application/epub+zip" = [ "calibre-ebook-viewer.desktop" ];
   };
 in
 {
@@ -202,6 +204,11 @@ in
       { plugin = vim-gtd;
         config = ''
           let g:gtd#dir = "~/gtd"
+	  let g:gtd#review = [
+		\ '(!inbox + !scheduled-'.strftime("%Y%m%d").') @work',
+		\ '!todo @work',
+		\ '!waiting @work',
+		\ ]
         '';
       }
     ];
