@@ -1,16 +1,34 @@
 import System.IO (hPutStrLn)
 
-import XMonad
+import XMonad (
+  logHook,
+  modMask,
+  terminal,
+  startupHook,
+  borderWidth,
+  normalBorderColor,
+  focusedBorderColor,
+  layoutHook,
+  manageHook,
+  workspaces,
+  mod4Mask,
+  xmonad,
+  composeAll,
+  className,
+  (=?),
+  (-->),
+  doShift,
+  (<+>),
+  spawn )
 
 import XMonad.Config.Desktop (desktopConfig)
-import XMonad.Hooks.EwmhDesktops
-import XMonad.Hooks.ManageHelpers
+import XMonad.Hooks.ManageHelpers (isFullscreen, doFullFloat)
 
 import XMonad.Util.SpawnOnce (spawnOnce)
 import XMonad.Util.Run (spawnPipe)
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.Cursor (setDefaultCursor, xC_left_ptr)
-import XMonad.Hooks.SetWMName
+import XMonad.Hooks.SetWMName (setWMName)
 
 import XMonad.Hooks.DynamicLog (dynamicLogWithPP, xmobarPP, xmobarColor, shorten, PP(..))
 import XMonad.Hooks.ManageDocks (avoidStruts, manageDocks)
