@@ -21,6 +21,8 @@ import XMonad (
   (<+>),
   spawn )
 
+import Data.List (isPrefixOf)
+
 import XMonad.Config.Desktop (desktopConfig)
 import XMonad.Hooks.ManageHelpers (isFullscreen, doFullFloat)
 
@@ -80,6 +82,10 @@ myManageHook = composeAll
     , className =? "Google-chrome"          --> doShift ( myWorkspaces !! 1 )
     , className =? "vlc"                    --> doShift ( myWorkspaces !! 4 )
     , className =? "jetbrains-idea"         --> doShift ( myWorkspaces !! 2 )
+    , fmap ("Slack" `isPrefixOf`) className --> doShift ( myWorkspaces !! 5 )
+    , fmap ("slack" `isPrefixOf`) className --> doShift ( myWorkspaces !! 5 )
+    , fmap ("Zoom" `isPrefixOf`) className  --> doShift ( myWorkspaces !! 6 )
+    , fmap ("zoom" `isPrefixOf`) className  --> doShift ( myWorkspaces !! 6 )
     , isFullscreen                          --> doFullFloat
     ] <+> manageHook desktopConfig <+> manageDocks
 

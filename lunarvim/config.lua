@@ -157,6 +157,16 @@ lvim.plugins = {
     config = function ()
       vim.cmd("let g:scratch_persistence_file='~/scratch_database'")
     end
+  },
+  {
+    "DougBeney/vim-reddit"
+  },
+  {
+    --"mattn/calendar-vim"
+    "itchyny/calendar.vim",
+    config = function ()
+      vim.cmd('source ~/.config/lvim/calendar_diary.vim')
+    end
   }
 }
 
