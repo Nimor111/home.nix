@@ -1,7 +1,7 @@
-Config { font = "mononoki Nerd Font Mono:pixelsize=16:antialias=true:autohint=true"
+Config { font = "mononoki Nerd Font Mono:size=10:antialias=true:autohint=true"
        , bgColor = "#282828"
        , fgColor = "#B45BCF"
-       , position = Top
+       , position = TopSize L 100 24
        , lowerOnStart = True
        , hideOnStart = False
        , persistent= True
@@ -28,10 +28,11 @@ Config { font = "mononoki Nerd Font Mono:pixelsize=16:antialias=true:autohint=tr
                                             -- charged status
                                             , "-i"   , "<fc=#006000>Charged</fc>"
                                   ] 50
+		    , Run Kbd [("us", "en"), ("bg", "BG")]
             , Run UnsafeStdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " <icon=purescript_20.xpm/> <fc=#666666>|</fc> %UnsafeStdinReader%      <fc=#FFB86C>%uptime%</fc> <fc=#FFB86C>%cpu%</fc> <fc=#FF5555>%memory%</fc> <fc=#82AAFF>%disku%</fc> <fc=#c3e88d>%dynnetwork%</fc> <icon=calendar-clock-icon_20.xpm/> <fc=#8BE9FD>%date%</fc> <fc=#dAA520>%battery%</fc> "
+       , template = " <icon=purescript_20.xpm/> <fc=#666666>|</fc> %UnsafeStdinReader%      <fc=#FFB86C>%uptime%</fc> <fc=#FFB86C>%cpu%</fc> <fc=#FF5555>%memory%</fc> <fc=#82AAFF>%disku%</fc> <fc=#c3e88d>%dynnetwork%</fc> <icon=calendar-clock-icon_20.xpm/> <fc=#8BE9FD>%date%</fc> <fc=#dAA520>%battery%</fc> <icon=keyboard_20.xpm/> <fc=#dAA520>%kbd%</fc> "
        }
 
