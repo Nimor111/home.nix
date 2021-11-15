@@ -35,6 +35,8 @@ import XMonad.Hooks.SetWMName (setWMName)
 import XMonad.Hooks.DynamicLog (dynamicLogWithPP, xmobarPP, xmobarColor, shorten, PP(..))
 import XMonad.Hooks.ManageDocks (avoidStruts, manageDocks)
 
+import XMonad.Actions.CycleWS (nextScreen)
+
 
 myTerminal = "termonad"
 myModMask = mod4Mask
@@ -46,11 +48,13 @@ myLockScreenCommand = "~/.local/bin/betterlockscreen -l"
 
 main :: IO ()
 main = do
-    xmobarProc <- spawnPipe "xmobar -x 0 ~/.config/xmobar/.xmobarrc"
+    xmobarProc1 <- spawnPipe "xmobar -x 0 ~/.config/xmobar/.xmobarrc"
+    xmobarProc2 <- spawnPipe "xmobar -x 1 ~/.config/xmobar/.xmobarrc"
 
     xmonad $ desktopConfig
         { logHook = dynamicLogWithPP xmobarPP
-            { ppOutput = hPutStrLn xmobarProc
+            { ppOutput = \x -> hPutStrLn xmobarProc1 x
+	                    >> hPutStrLn xmobarProc2 x
             , ppTitle = xmobarColor "#ffa500" "" . shorten 20
             }
             , modMask = myModMask
@@ -94,7 +98,7 @@ myKeys =
     , ("M-d", spawn "dmenu_run -p 'dmenu:'")
     , ("M-S-l", spawn myLockScreenCommand)
     , ("M-r", spawn "rofi -show run")
-    , ("M-w", spawn "rofi -show window")
+    --, ("M-w", spawn "rofi -show window")
     , ("M-p", spawn "gopass ls --flat | rofi -dmenu | xargs --no-run-if-empty gopass show -c")
     -- you have to install the light ( or lux ) package for this to work, if on non-nixos system it doesn't work when installed with nix
     , ("<XF86MonBrightnessUp>",   spawn "lux -a 10%")
@@ -103,6 +107,7 @@ myKeys =
     , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ -10%")
     , ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +10%")
     , ("<Print>", spawn "scrot -s")
+    , ("M-w", nextScreen)
     ]
 
 myWorkspaces = [ "dev", "www", "code", "emacs", "vpn", "slack", "chat", "book", "game" ]
