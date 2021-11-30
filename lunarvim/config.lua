@@ -42,17 +42,31 @@ lvim.builtin.which_key.mappings["x"] = { "<cmd>Scratch<CR>", "Scratch buffer" }
 --   lvim.builtin.telescope.defaults.mappings.n["<C-k>"] = actions.move_selection_previous
 -- end
 
+lvim.builtin.telescope.defaults.layout_strategy = "flex"
+lvim.builtin.telescope.defaults.layout_config.width = 180
+
 -- Use which-key to add extra bindings with the leader-key prefix
--- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
--- lvim.builtin.which_key.mappings["t"] = {
---   name = "+Trouble",
---   r = { "<cmd>Trouble lsp_references<cr>", "References" },
---   f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
---   d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnostics" },
---   q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
---   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
---   w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnostics" },
--- }
+lvim.builtin.which_key.mappings["B"] = { "<cmd>Telescope buffers<CR>", "Buffers"}
+lvim.builtin.which_key.mappings["T"] = {
+  t = { "<cmd>Telescope<CR>", "Telescope" }
+}
+lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
+lvim.builtin.which_key.mappings["t"] = {
+  name = "+Trouble",
+  r = { "<cmd>Trouble lsp_references<cr>", "References" },
+  f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
+  d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnostics" },
+  q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
+  l = { "<cmd>Trouble loclist<cr>", "LocationList" },
+  w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnostics" },
+}
+
+lvim.builtin.which_key.mappings["w"] = {
+   j = { "<cmd>wincmd j<cr>", "Move to window below"},
+   k = { "<cmd>wincmd k<cr>", "Move to window above"},
+   h = { "<cmd>wincmd h<cr>", "Move to the left window"},
+   l = { "<cmd>wincmd l<cr>", "Move to right window"},
+ }
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
@@ -161,12 +175,40 @@ lvim.plugins = {
   {
     "DougBeney/vim-reddit"
   },
-  {
+  -- {
     --"mattn/calendar-vim"
-    "itchyny/calendar.vim",
+    --"itkkchyny/calendar.vim",
+    -- config = function ()
+    --   vim.cmd('source ~/.config/lvim/calendar_diary.vim')
+    -- end
+  -- },
+  {
+    "Olical/aniseed",
+    "Olical/conjure"
+  },
+  {
+    "vimoutliner/vimoutliner",
     config = function ()
-      vim.cmd('source ~/.config/lvim/calendar_diary.vim')
+      vim.cmd("let maplocalleader = ','")
     end
+  },
+  {
+    "ntpeters/vim-better-whitespace",
+    config = function ()
+      vim.cmd([[
+        let g:better_whitespace_enabled=1
+        let g:strip_whitespace_on_save=1
+        let g:strip_whitespace_confirm=0
+        let g:better_whitespace_filetypes_blacklist=['dashboard']
+     ]])
+    end
+  },
+  {
+    "nicwest/vim-http"
+  },
+  {
+    "mfussenegger/nvim-jdtls",
+    ft = "java"
   }
 }
 
@@ -178,3 +220,7 @@ lvim.autocommands.custom_groups = {
 -- Longer timeout between commands
 vim.cmd("set timeoutlen=1000 ttimeoutlen=0")
 vim.cmd("set foldlevel=30")
+
+lvim.format_on_save = false
+
+vim.cmd("set colorcolumn=120")

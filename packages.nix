@@ -37,7 +37,8 @@
     pkgs.brave
     pkgs.mu
     pkgs.ledger
-    pkgs.python3
+    #pkgs.python3
+    pkgs.python310
     pkgs.scrot
     pkgs.tree
     pkgs.jq
